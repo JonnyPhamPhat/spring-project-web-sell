@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns:sd="http://www.w3.org/1999/xhtml">
+
+<head th:replace="/fragment :: header">
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul th:replace="fragment :: sideBar"></ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav th:replace="fragment :: topBar"></nav>
+            <!-- End topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <div class="text-end">
+                    <a href="/smartPhone/new" class="btn btn-primary">
+                        Add smartPhone
+                    </a>
+                </div>
+                <br>
+                <br>
+
+                <div th:if="${size == 0}">
+                    <p class="text-center">No laptop</p>
+                </div>
+
+                <div th:if="${success}" class="text-center alert alert-success">
+                    <p th:text="${success}"></p>
+                </div>
+                <div th:if="${failed}" class="text-center alert alert-danger">
+                    <p th:text="${failed}"></p>
+                </div>
+
+                <table class="table table-striped" th:if="${size > 0}">
+                    <thead>
+                    <tr>
+                        <th scope="col">Smart phone</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Operating system</th>
+                        <th scope="col">Current quantity</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="smartPhone : ${smartPhones}" th:object="${smartPhone}">
+                        <td style="width:100px;">
+                            <a th:href="@{/assets/{filename}(filename=*{filename})}">
+                                <img th:src="@{/assets/{filename}(filename=*{filename})}" alt="" class="img-thumbnail w-100">
+                            </a>
+                        </td>
+                        <td style="width:350px;" th:text="${smartPhone.name}"></td>
+                        <td th:text="${smartPhone.operatingSystem}"></td>
+                        <td th:text="${smartPhone.currentQuantity}"></td>
+                        <td>
+                            <a th:href="@{/smartPhone/{id}/edit(id=*{id})}" class="btn btn-primary">Update</a>
+                            <a th:if="${smartPhone.is_deleted}==false" th:href="@{/delete-smartPhone/{id}(id=${smartPhone.id})}" class="btn btn-danger">Delete</a>
+                            <a th:if="${smartPhone.is_activated}==false" th:href="@{/enable-smartPhone/{id}(id=${smartPhone.id})}" class="btn btn-secondary">Enable</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!-- Pagination -->
+
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li th:if = "${currentPage != 0}" class="page-item">
+                            <a th:href="@{'/smartPhone/' + ${currentPage - 1}}" class="page-link" href="#">Previous</a>
+                        </li>
+                        <li th:each = "i : ${#numbers.sequence(1, totalPage)}" th:classappend="${currentPage == i - 1 ? 'active' : ''}" class="page-item">
+                            <a th:href="@{'/smartPhone/' + ${i - 1}}" class="page-link" href="#"><span th:text = "${i}"></span></a>
+                        </li>
+                        <li th:if = "${currentPage + 1 != totalPage}" class="page-item">
+                            <a th:href="@{'/smartPhone/' + ${currentPage + 1}}" class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+                <!--End Pagination -->
+
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- footer -->
+        <footer th:replace="fragment :: footer"></footer>
+        <!-- End of foooter -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a th:replace="fragment :: scroll"></a>
+
+<!-- Logout Modal-->
+<div th:replace = "fragment :: logoutModel"></div>
+
+<div th:replace="fragment :: script"></div>
+
+</body>
+
+</html>

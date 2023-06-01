@@ -3,9 +3,6 @@ package springwebsell.websell.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,7 +41,7 @@ public class LaptopController {
         model.addAttribute("title", "Laptop page");
         model.addAttribute("laptops", laptops);
         model.addAttribute("size", laptops.size());
-        return "laptop";
+        return "laptop/laptop";
     }
 
     @GetMapping("/laptop/{pageNo}")
@@ -58,13 +55,13 @@ public class LaptopController {
         model.addAttribute("totalPage", laptops.getTotalPages());
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("laptops", laptops);
-        return "laptop";
+        return "laptop/laptop";
     }
 
     @GetMapping("/laptop/new")
     public ModelAndView DisplayAddLaptopPage(){
         List<Category> categories = categoryService.findAll();
-        return new ModelAndView("new-laptop")
+        return new ModelAndView("laptop/new-laptop")
                 .addObject("laptops", new Laptop())
                 .addObject("categories", categories);
     }
@@ -76,7 +73,7 @@ public class LaptopController {
                 bindingResult.rejectValue("images", "MultipartNotEmpty");
             }
             List<Category> categories = categoryService.findAll();
-            return new ModelAndView("new-laptop")
+            return new ModelAndView("laptop/new-laptop")
                     .addObject("laptops", laptop)
                     .addObject("categories", categories);
         }
@@ -91,7 +88,7 @@ public class LaptopController {
     public ModelAndView DisplayEditLaptopPage(@PathVariable Long id){
         Laptop laptop = laptopService.findById(id);
         List<Category> categories = categoryService.findAll();
-        return new ModelAndView("edit-laptop")
+        return new ModelAndView("laptop/edit-laptop")
                 .addObject("laptops", laptop)
                 .addObject("categories", categories);
     }
@@ -100,7 +97,7 @@ public class LaptopController {
     public ModelAndView EditInfoLaptop(@PathVariable Long id, @Validated Laptop laptop, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             List<Category> categories = categoryService.findAll();
-            return new ModelAndView("edit-laptop")
+            return new ModelAndView("laptop/edit-laptop")
                     .addObject("laptops", laptop)
                     .addObject("categories", categories);
         }

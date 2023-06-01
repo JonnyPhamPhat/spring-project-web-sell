@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org/">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Detail product</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link th:href="@{/home/css/styles.css}" rel="stylesheet" />
+</head>
+<body>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light"
+     style="position:fixed;z-index: 1000;width: 100%;">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" th:href="@{/home}">PNP shop</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/home}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/}">Admin</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/home/all-laptop/0}">Laptop</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/home/all-smartPhone/0}">Smart phone</a></li>
+            </ul>
+            <form class="d-flex">
+                <button class="btn btn-outline-dark" type="submit">
+                    <i class="bi-cart-fill me-1"></i>
+                    Cart
+                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+<br>
+<br>
+<!-- Section-->
+<section class="py-5 container" th:object="${laptop}">
+    <div class="row">
+        <div class="col-md-6">
+            <img th:src="@{/assets/{filename}(filename=*{filename})}" th:alt="*{name}" class="img-fluid rounded w-100">
+        </div>
+
+        <div class="col-md-6">
+            <h2 th:text="*{name}"></h2>
+            <div class="mb-3" style="font-size:20px; line-height:50px;">
+                <div>
+                    <span>Ổ cứng:  </span>
+                    <span th:text="*{drive}"></span>
+                </div>
+                <div>
+                    <span>Card màn hình:  </span>
+                    <span th:text="*{card}"></span>
+                </div>
+                <div>
+                    <span>Hệ điều hành:  </span>
+                    <span th:text="*{operatingSystem}"></span>
+                </div>
+                <div>
+                    <span>Màn hình:  </span>
+                    <span th:text="*{screen}"></span>
+                </div>
+                <div>
+                    <span>Số lượng còn:  </span>
+                    <span th:text="*{currentQuantity}"></span>
+                </div>
+                <div>
+                    <span style="font-size:30px;" class="text-danger" th:text="*{salePrice}"></span>
+                    <span style="font-size:30px;" class="text-danger">$</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+<br>
+
+<h2 class="text-center text-secondary">Related products</h2>
+<div class="row container" >
+    <div class="row justify-content-evenly">
+        <div class="col-md-3 my-5 card h-5" th:each="laptopRelated : ${relatedLaptops}" th:object="${laptopRelated}"
+             style="width:300px; height:450px;">
+            <a th:href="@{/home/laptop/{id}(id=*{id})}" style="text-decoration: none;">
+                <img th:src="@{/assets/{filename}(filename=*{filename})}" th:alt="*{name}" class="card-img-top"
+                 style="margin-top:10px">
+            </a>
+
+            <div class="card-body">
+                <div>
+                    <div class="card-title fs-6" th:text="*{name}"></div>
+                    <span style="font-size:30px;font-weight:600;" class="card-title fs-6 text-danger" th:text="*{salePrice}"></span>
+                    <span class="text-danger">$</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+
+<!-- Footer-->
+<footer class="py-5 bg-dark">
+    <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script th:src="@{/home/js/scripts.js}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

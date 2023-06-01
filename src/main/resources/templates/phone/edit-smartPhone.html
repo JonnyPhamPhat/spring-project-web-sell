@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org/" >
+
+<head th:replace="/fragment :: header">
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul th:replace="fragment :: sideBar"></ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav th:replace="fragment :: topBar"></nav>
+            <!-- End topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <h1>Add smartPhone</h1>
+
+                <form th:action="@{/smartPhone/{id}/edit(id=*{id})}" method="post" th:object="${smartPhones}" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name smartPhone:</label>
+                        <input type="text" id="name" placeholder="Enter name laptop"
+                               class="form-control" th:field="*{name}">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}"
+                             th:errors="*{name}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="operatingSystem" class="form-label">Operating system:</label>
+                        <input type="text" id="operatingSystem" placeholder="Enter operatingSystem"
+                               class="form-control" th:field="*{operatingSystem}">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('operatingSystem')}"
+                             th:errors="*{operatingSystem}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="chip" class="form-label">Chip:</label>
+                        <input type="text" id="chip" placeholder="Enter chip"
+                               class="form-control" th:field="*{chip}">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('chip')}"
+                             th:errors="*{chip}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="ram" class="form-label">Ram:</label>
+                        <input type="text" id="ram" placeholder="Enter ram"
+                               class="form-control" th:field="*{ram}">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('ram')}"
+                             th:errors="*{ram}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="pin" class="form-label">Pin:</label>
+                        <input type="text" id="pin" placeholder="Enter pin"
+                               class="form-control" th:field="*{pin}">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('pin')}"
+                             th:errors="*{pin}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="salePrice" class="form-label">Sale price:</label>
+                        <input type="text" id="salePrice" placeholder="Enter salePrice"
+                               class="form-control" th:field="*{salePrice}">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('salePrice')}"
+                             th:errors="*{salePrice}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="currentQuantity" class="form-label">Current quantity:</label>
+                        <input type="text" id="currentQuantity" placeholder="Enter currentQuantity"
+                               class="form-control" th:field="*{currentQuantity}">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('currentQuantity')}"
+                             th:errors="*{currentQuantity}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="images" class="form-label">Images:</label>
+                        <input type="file" name = "images" id="images" placeholder="Enter images"
+                               class="form-control" th:field="*{images}">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('images')}"
+                             th:errors="*{images}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category:</label>
+                        <select id="category" class="form-control" th:field="*{category}" multiple>
+                            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">
+
+                            </option>
+                        </select>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('category')}"
+                             th:errors="*{category}">
+                        </div>
+                    </div>
+
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary"> Save </button>
+                    </div>
+                </form>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- footer -->
+        <footer th:replace="fragment :: footer"></footer>
+        <!-- End of foooter -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a th:replace="fragment :: scroll"></a>
+
+<!-- Logout Modal-->
+<div th:replace = "fragment :: logoutModel"></div>
+
+<div th:replace="fragment :: script"></div>
+
+</body>
+
+</html>

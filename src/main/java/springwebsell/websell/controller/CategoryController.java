@@ -28,7 +28,7 @@ public class CategoryController {
         model.addAttribute("size", categories.size());
         model.addAttribute("categoryNew", new Category());
         model.addAttribute("title", "Category");
-        return "category";
+        return "category/category";
     }
 
     @PostMapping("/new-category")

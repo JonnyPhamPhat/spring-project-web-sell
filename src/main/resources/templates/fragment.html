@@ -60,7 +60,8 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Components:</h6>
                 <a class="collapse-item" th:href="@{/category}">Manage category</a>
-                <a class="collapse-item" th:href="@{/laptop/0}"> Manage product laptop</a>
+                <a class="collapse-item" th:href="@{/laptop/0}"> Manage laptop</a>
+                <a class="collapse-item" th:href="@{/smartPhone/0}"> Manage smartPhone</a>
             </div>
         </div>
     </li>
@@ -107,7 +108,7 @@
                 <a class="collapse-item" th:href="@{/forgot-password}">Forgot Password</a>
                 <div class="collapse-divider"></div>
                 <h6 class="collapse-header">Other Pages:</h6>
-                <a class="collapse-item" href="404.html">404 Page</a>
+                <a class="collapse-item" th:href="@{/home}">Shop home page</a>
                 <a class="collapse-item" href="blank.html">Blank Page</a>
             </div>
         </div>

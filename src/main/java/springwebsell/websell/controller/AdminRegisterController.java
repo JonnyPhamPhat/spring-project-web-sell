@@ -34,15 +34,15 @@ public class AdminRegisterController {
 
 
 
-    @GetMapping("/index")
-    public String ViewAdminHomePage(Model model){
-        model.addAttribute("title", "Admin home page");
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if(authentication == null || authentication instanceof AnonymousAuthenticationToken){
-            return "redirect:/login";
-        }
-        return "index";
-    }
+//    @GetMapping("/index")
+//    public String ViewAdminHomePage(Model model){
+//        model.addAttribute("title", "Admin home page");
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        if(authentication == null || authentication instanceof AnonymousAuthenticationToken){
+//            return "redirect:/login";
+//        }
+//        return "index";
+//    }
 
     @GetMapping("/register")
     public String register(Model model){

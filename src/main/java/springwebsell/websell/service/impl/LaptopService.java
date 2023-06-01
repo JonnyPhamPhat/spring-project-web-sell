@@ -51,7 +51,20 @@ public class LaptopService implements ILaptopService {
     @Override
     public Page<Laptop> pageLaptops(int pageNo) {
         Pageable pageable = PageRequest.of(pageNo, 5);
-        Page<Laptop> pageLatop = laptopRepository.pageLaptop(pageable);
-        return pageLatop;
+        Page<Laptop> pageLaptop = laptopRepository.pageLaptop(pageable);
+        return pageLaptop;
     }
+
+    @Override
+    public Page<Laptop> pageAllLaptops(int pageNo) {
+        Pageable pageable = PageRequest.of(pageNo, 12);
+        Page<Laptop> pageAllLaptop = laptopRepository.pageAllLaptop(pageable);
+        return pageAllLaptop;
+    }
+
+    @Override
+    public List<Laptop> getRelatedProducts(Long categoryId) {
+        return laptopRepository.getRelateProducts(categoryId);
+    }
+
 }
